@@ -1,10 +1,19 @@
 from django.shortcuts import render
+from django.contrib import messages
 from .models import About
 from .forms import CollaborateForm
 
 # Create your views here.
 
 def about_me(request):
+
+    if request.method == "POST":
+        CollaborateForm(data=request.POST)
+        if collaborate_form.is_valid():
+            collaborate_form.save()
+            messages.add_message(request, messages.SUCCESS, "Collaboration request received! I endeavour to respond within 2 working days.")
+
+
     """
     Renders the About page
     """
